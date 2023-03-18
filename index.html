@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Phần mềm tính tiền bi a TEEMOO</title>
+</head>
+
+<body>
+    <style>
+        #wp-content {
+            padding: 40px;
+            border: 2px solid red;
+            border-radius: 10px;
+        }
+
+        .wrapper {
+            background: rgb(241, 195, 245);
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+        }
+
+        /* .total {
+            color: red;
+        } */
+    </style>
+    <div class="container">
+        <h1 class="text-success text-center">Trần Quý</h1>
+        <div id="wp-content">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <div class="wrapper">
+                        <b>Thời gian: </b><span id="time1">00:00:00</span>
+                        <button onclick="startTimer('#time1','#price1')" class="btn-sm btn-success">Tính tiền bi a bàn
+                            1</button>
+                        <div> <b class="total">Thành tiền:</b><span id="price1"> 0 đ</span></div>
+                        <!-- <button onclick="reset()" class="btn-sm btn-danger">Reset</button> -->
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="wrapper">
+                        <b>Thời gian: </b><span id="time2">00:00:00</span>
+                        <button onclick="startTimer('#time2','#price2')" class="btn-sm btn-success">Tính tiền bi a bàn
+                            2</button>
+                        <div> <b class="total">Thành tiền:</b><span id="price2"> 0 đ</span></div>
+                        <!-- <button onclick="reset()" class="btn-sm btn-danger">Reset</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <a href="" class="btn btn-primary mx-3">Dừng</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function startTimer(time, element) {
+            var display = document.querySelector(time);
+            var price = document.querySelector(element);
+            var secondsPassed = 0;
+            clearInterval(price.timerId); // Xóa bỏ setInterval đang chạy trên phần tử price
+
+            price.timerId = setInterval(function () {
+                secondsPassed++;
+                var hours = Math.floor(secondsPassed / 3600);
+                var minutes = Math.floor((secondsPassed - hours * 3600) / 60);
+                var seconds = secondsPassed % 60;
+
+                display.textContent = ('0' + hours).slice(-2) + ':' +
+                    ('0' + minutes).slice(-2) + ':' +
+                    ('0' + seconds).slice(-2);
+                if (hours > 0) {
+                    price.innerHTML = ' ' + hours * 50000 + Math.round(50000 / 60 * minutes) + ' đ'
+                } else {
+                    price.innerHTML = ' ' + Math.round(50000 / 60 * minutes) + ' đ'
+                }
+            }, 1000);
+        }
+
+
+    </script>
+</body>
+
+</html>
