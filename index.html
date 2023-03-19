@@ -66,7 +66,7 @@
             var price = document.querySelector(element);
             var secondsPassed = 0;
             clearInterval(price.timerId); // Xóa bỏ setInterval đang chạy trên phần tử price
-
+            secondsPassed = 3600;
             price.timerId = setInterval(function () {
                 secondsPassed++;
                 var hours = Math.floor(secondsPassed / 3600);
@@ -77,9 +77,9 @@
                     ('0' + minutes).slice(-2) + ':' +
                     ('0' + seconds).slice(-2);
                 if (hours > 0) {
-                    price.innerHTML = ' ' + hours * 50000 + Math.round(50000 / 60 * minutes) + ' đ'
+                    price.innerHTML = ' ' + Math.floor(hours * 50000 + 50000 / 60 * minutes) + ' đ'
                 } else {
-                    price.innerHTML = ' ' + Math.round(50000 / 60 * minutes) + ' đ'
+                    price.innerHTML = ' ' + Math.floor(50000 / 60 * minutes) + ' đ'
                 }
             }, 1000);
         }
